@@ -19,9 +19,31 @@ $serif: 'Volkhov', Georgia, serif;
 $sans_serif: Verdana, Helvetica, Arial, sans-serif;
 $monospace: Monaco, Courier, "Courier New", monospace;
 
-$body_font: $monospace;
+$body_font: $sans_serif;
 $label_font: $serif;
+
+// http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/
+@mixin image-replacement {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
 
 /*----- Spacing & Sizing -----*/
 $DEFAULT_SIZE: 16px;
 $font_size: 100%; /* font_size: 100% */
+$font_pixel_base: ($DEFAULT_SIZE *($font_size / 100%));  /* font_pixel_base: 16px -- Must declare in conjunction with font-size to work properly*/
+
+// Function that returns the number of ems equivilent to a number of pixels
+@function fraction($numerator, $denominator:$font_pixel_base) {
+	@return ($numerator / $denominator);
+}
+
+// Function that returns the a percentage
+@function percent($numerator, $denominator:100) {
+	$fraction: fraction($numerator, $denominator);
+	@return $fraction * 100%;
+}
+
+/*----- SVG Elements -----*/
+//$plus-svg: PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE0LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgNDMzNjMpICAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDMyIDMyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTcuNzkyLDEuMTA0djEzLjE2aDEyLjY1NnYzLjM2MUgxNy43OTJ2MTMuMjcxaC0zLjU4NFYxNy42MjVIMS41NTJ2LTMuMzYxaDEyLjY1NlYxLjEwNEgxNy43OTJ6Ii8+CjwvZz4KPC9zdmc+;

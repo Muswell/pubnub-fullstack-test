@@ -10,13 +10,13 @@ body {
     background:$body_color;
     color: $txt_color;
     margin:0 auto;
-    padding: ems(20px) per(20px, 960px); /* Temporary */
 }
 
 h2 {
     font-size: em(64); /* 64px */
-    line-height: em(72); /* 72px */
-    margin:em(40) 0 0; /* 20px 0 0 */
+    line-height: em(72, 64); /* 72px */
+    margin:em(40, 64) 0 0; /* 20px 0 0 */
+    text-align: center;
 }
 
 /* ============================================================

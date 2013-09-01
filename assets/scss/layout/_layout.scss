@@ -1,0 +1,77 @@
+$total-width: 100%;  
+
+#tasks-container {
+    text-align: center;
+    //@include column(12);
+    //padding: percent(5, 320);
+}
+
+/* There are two divs with id=tasks */
+#tasks-wrapper > div > div {
+    padding: em(5, 16) percent(5, 320);
+}
+
+
+.task {
+    text-align: left;
+    padding: em(6);
+    margin: em(5);
+    @include linear-gradient(-45deg, rgba($white, .4), rgba(darken($white, 3%), .4));
+    border-radius: 5px;
+    box-shadow: 2px 2px 7px 2px rgba($dark_red, .8);
+}
+
+.remove {
+    @include hide-text;
+    display: inline-block;
+    vertical-align: middle;
+    
+    background: rgba($white, .3);
+    color: rgba($black, .3);
+    border-radius: 2px;
+    
+    
+    &:before {    
+        font-size: 16px;
+        font-family: $body_font;
+        line-height: 1;
+        display: inline-block;
+        vertical-align: middle;
+        
+        padding: em(2) em(4);
+        
+        
+
+         
+        content: "\2713";
+        
+    };
+}
+
+.name {
+    vertical-align: middle;
+}
+
+.created {
+    font-family: $monospace;
+    color: $gray_40;
+    
+    vertical-align: middle;
+    &:before {
+        content: "Created: ";
+        color: $red;
+        font-family: $body_font;
+    };
+}
+
+.modified {
+    font-family: $monospace;
+    vertical-align: middle;
+    color: $gray_40;
+    &:before {
+        content: "Modified: ";
+        color: $red;
+        font-family: $body_font;
+    };
+    display: none;
+}

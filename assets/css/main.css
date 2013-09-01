@@ -19,6 +19,8 @@ $_6: Utilites ---- (./base/_utilities.scss)
 /*----- Fonts -----*/
 /*----- Spacing & Sizing -----*/
 /* font_size: 100% */
+/* font_pixel_base: 16px -- Must declare in conjunction with font-size to work properly*/
+/*----- SVG Elements -----*/
 /*--------------------------------------------------
     $_1.0 - Reset: Minimal browser standardization
 --------------------------------------------------*/
@@ -56,6 +58,12 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+/* Set Everything to Border Box */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
 /*--------------------------------------------------
     $_2.0 - Global: High-level display settings
 --------------------------------------------------*/
@@ -65,22 +73,21 @@ table {
 body {
   font-size: 100%;
   line-height: 1.5;
-  font-family: Monaco, Courier, "Courier New", monospace;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   background: #c50220;
   color: white;
-  margin: 0 auto;
-  padding: ems(20px) per(20px, 960px);
-  /* Temporary */ }
+  margin: 0 auto; }
 
 h2 {
   font-size: 4em;
   /* 64px */
-  line-height: 4.5em;
+  line-height: 1.125em;
   /* 72px */
-  margin: 2.5em 0 0;
-  /* 20px 0 0 */ }
+  margin: 0.625em 0 0;
+  /* 20px 0 0 */
+  text-align: center; }
 
 /* ============================================================
     Text-level semantics
@@ -109,9 +116,110 @@ body {
 /*--------------------------------------------------
     $_4.0 - Layout: Placement of structural elements
 --------------------------------------------------*/
+#tasks-container {
+  text-align: center; }
+
+/* There are two divs with id=tasks */
+#tasks-wrapper > div > div {
+  padding: 0.3125em 1.5625%; }
+
+.task {
+  text-align: left;
+  padding: 0.375em;
+  margin: 0.3125em;
+  background-color: rgba(255, 255, 255, 0.4);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(247, 247, 247, 0.4)));
+  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.4), rgba(247, 247, 247, 0.4));
+  background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.4), rgba(247, 247, 247, 0.4));
+  background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 255, 0.4), rgba(247, 247, 247, 0.4));
+  background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, 0.4), rgba(247, 247, 247, 0.4));
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.4), rgba(247, 247, 247, 0.4));
+  border-radius: 5px;
+  box-shadow: 2px 2px 7px 2px rgba(171, 2, 28, 0.8); }
+
+.remove {
+  background-color: transparent;
+  border: 0;
+  color: transparent;
+  font: 0/0 a;
+  text-shadow: none;
+  display: inline-block;
+  vertical-align: middle;
+  background: rgba(255, 255, 255, 0.3);
+  color: rgba(0, 0, 0, 0.3);
+  border-radius: 2px; }
+  .remove:before {
+    font-size: 16px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.125em 0.25em;
+    content: "\2713"; }
+
+.name {
+  vertical-align: middle; }
+
+.created {
+  font-family: Monaco, Courier, "Courier New", monospace;
+  color: #666666;
+  vertical-align: middle; }
+  .created:before {
+    content: "Created: ";
+    color: #c50220;
+    font-family: Verdana, Helvetica, Arial, sans-serif; }
+
+.modified {
+  font-family: Monaco, Courier, "Courier New", monospace;
+  vertical-align: middle;
+  color: #666666;
+  display: none; }
+  .modified:before {
+    content: "Modified: ";
+    color: #c50220;
+    font-family: Verdana, Helvetica, Arial, sans-serif; }
+
 /*--------------------------------------------------
     $_5.0 - Components: Elements with specialized functionality or design
 --------------------------------------------------*/
+form {
+  width: 100%;
+  background-color: #ab021c;
+  position: fixed;
+  bottom: 0;
+  padding: 0.625em;
+  text-align: right; }
+
+input {
+  font-size: 100%;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  vertical-align: middle; }
+  input[type=text] {
+    border: none;
+    background-color: #c50220;
+    color: white;
+    width: 15.625em;
+    padding: 0.25em; }
+    input[type=text]:focus {
+      outline: 0; }
+    input[type=text]::-webkit-input-placeholder {
+      content: "HEY"; }
+    input[type=text]:-moz-placeholder {
+      content: "HEY"; }
+    input[type=text]:-ms-input-placeholder {
+      content: "HEY"; }
+  input[type=submit] {
+    background-color: transparent;
+    border: 0;
+    color: transparent;
+    font: 0/0 a;
+    text-shadow: none;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE0LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgNDMzNjMpICAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDMyIDMyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTcuNzkyLDEuMTA0djEzLjE2aDEyLjY1NnYzLjM2MUgxNy43OTJ2MTMuMjcxaC0zLjU4NFYxNy42MjVIMS41NTJ2LTMuMzYxaDEyLjY1NlYxLjEwNEgxNy43OTJ6Ii8+CjwvZz4KPC9zdmc+) center center no-repeat; }
+
 /*--------------------------------------------------
     $_6.0 - Utilities: Debugging/Messaging elements
 --------------------------------------------------*/
