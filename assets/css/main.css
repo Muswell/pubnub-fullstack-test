@@ -1,0 +1,117 @@
+/*--------------------------------------------------
+Table of Contents:
+----------------------------------------------------
+$_0: Vars -------- (./base/_vars.scss)
+$_1: Reset ------- (./base/_reset.scss)
+$_2: Global ------ (./base/_global.scss)
+$_3: Grid ------ (./base/_grid.scss)
+$_4: Layout ------ (./base/_layout.scss)
+$_5: Compponents - (./base/_components.scss)
+$_6: Utilites ---- (./base/_utilities.scss)
+--------------------------------------------------*/
+/*--------------------------------------------------
+    $_0.0 - Vars: Site-wide variables and mixins
+--------------------------------------------------*/
+/*----- 3RD Party Libraries -----*/
+/* import bourbon */
+/*----- Descriptive Colors -----*/
+/*----- Functional Colors -----*/
+/*----- Fonts -----*/
+/*----- Spacing & Sizing -----*/
+/* font_size: 100% */
+/*--------------------------------------------------
+    $_1.0 - Reset: Minimal browser standardization
+--------------------------------------------------*/
+/* Display Standardization */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+/* Element specific resets */
+body {
+  line-height: 1; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*--------------------------------------------------
+    $_2.0 - Global: High-level display settings
+--------------------------------------------------*/
+/* ============================================================
+    Sections
+============================================================ */
+body {
+  font-size: 100%;
+  line-height: 1.5;
+  font-family: Monaco, Courier, "Courier New", monospace;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background: #c50220;
+  color: white;
+  margin: 0 auto;
+  padding: ems(20px) per(20px, 960px);
+  /* Temporary */ }
+
+h2 {
+  font-size: 4em;
+  /* 64px */
+  line-height: 4.5em;
+  /* 72px */
+  margin: 2.5em 0 0;
+  /* 20px 0 0 */ }
+
+/* ============================================================
+    Text-level semantics
+============================================================ */
+a {
+  color: #666666;
+  text-decoration: none; }
+
+a:hover,
+a:focus,
+a:active {
+  color: #545454; }
+
+/*--------------------------------------------------
+    $_3.0 - Grid: Functions for grid spacing
+--------------------------------------------------*/
+body {
+  width: 100%;
+  *zoom: 1; }
+  body:before, body:after {
+    content: "";
+    display: table; }
+  body:after {
+    clear: both; }
+
+/*--------------------------------------------------
+    $_4.0 - Layout: Placement of structural elements
+--------------------------------------------------*/
+/*--------------------------------------------------
+    $_5.0 - Components: Elements with specialized functionality or design
+--------------------------------------------------*/
+/*--------------------------------------------------
+    $_6.0 - Utilities: Debugging/Messaging elements
+--------------------------------------------------*/
