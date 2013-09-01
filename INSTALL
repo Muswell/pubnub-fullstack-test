@@ -1,0 +1,6 @@
+INSTALL
+-------
+1) >> cd api
+2) >> easy_install virtualenv
+3) >> virtualenv ./
+4) pip install gevent flask

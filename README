@@ -1,0 +1,9 @@
+README
+--------
+CLIENT PROGRAM
+1) To run the client program copy the fullstack test folder into your webroot navigate to <WEBROOT>/pubnub-fullstack-test/task-list-client.html
+ 
+SERVER PROGRAM
+1) cd api
+2) ./bin/python task-list-server.py --env=local --port=8080
+3) navigate to <WEBROOT>/pubnub-fullstack-test/task-list-server.html

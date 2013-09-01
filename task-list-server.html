@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PubNub TaskList</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <script src="lib/jquery-latest.min.js"></script>
+        <script src="lib/underscore-min.js"></script>
+        <script src="lib/backbone-min.js"></script>
+        <script src="lib/pubnub-3.5.3.1.min.js" ></script>
+        <script>
+            /**
+                TODO: On load get the set of existing tasks
+                TODO: Insert a task to the database
+                TODO: Delete a task from the database
+                TODO: Update a task apply it to the database
+                TODO: Publish from the server to the client when a task is added/removed
+                TODO: Whatever else is compelling 
+            **/
+            (function(){
+                // model for a single task
+                var TaskModel = Backbone.Model.extend({}); 
+
+                // a set of TaskModel's 
+                var TasksCollection = Backbone.Collection.extend({});
+
+                // the collection singleton for the app
+                var task_collection = new TasksCollection();
+
+                // base class for our views, does some general view management and initialization 
+                var BaseView = Backbone.View.extend({
+                    initialize:function(el,options){
+                        Backbone.View.prototype.initialize.apply(this,[options]);
+                        this.options = $.extend(true,options,this.options);
+                        this.setElement(el);
+
+                    },
+                    serialize_form:function(form){
+                        var inputs = $('input',$(form));
+                        var names = inputs.attr('name');
+                        var values =  inputs.val();
+
+                        names = $.type(names) === 'string' ? [names] : names; 
+                        values = $.type(values) === 'string' ? [values] : values;
+
+                        var data = {}
+                        _.each(names,function(name,i){
+                            data[names[i]] = values[i];
+
+                        });
+                        return data;
+
+                    },
+                    render:function(){
+                        var tpl = this.template();
+                        this.$el.html(tpl);
+                    } 
+
+                });
+                /**
+                    TasksView, 
+                    takes the <script id="tasks-template"> template and applies it to the #tasks div
+
+                **/
+                var TasksView = BaseView.extend({
+                    task_tpl:null,
+                    template:function(){
+                        return _.template($('#tasks-template').html(),{'tasks':this.options.tasks,'TaskTpl':this.task_tpl});
+                    },
+                    initialize:function(el,options){
+                        BaseView.prototype.initialize.apply(this,[el,options]);
+                        // get the individual task template
+                        this.task_tpl = $('#task-template').html();
+                        // bind the add and remove collection events to the given TaskCollection singleton
+                        this.options.tasks.on('add',this.render,this);
+                        this.options.tasks.on('remove',this.render,this);
+                    }
+
+                });
+                /**
+                    TasksWrapperView,
+                    Wraps the form and TasksView, captures the click and submit events and performs operations on the TaskCollection singleton
+                    takes the <script id="tasks-view-template"> template and binds it to the #tasks-container
+                **/
+                var TasksWrapperView = BaseView.extend({
+                    initialize:function(el,options){
+                        BaseView.prototype.initialize.apply(this,[el,options]);
+                    },
+                    template:function(){
+                        return _.template($('#tasks-view-template').html(),{'tasks':this.options.tasks});
+                    },
+                    render:function(){
+                        BaseView.prototype.render.call(this);
+                        // construct the TaskView to the #tasks
+                        new TasksView($('#tasks',this.$el),{'tasks':this.options.tasks}).render(); 
+                    },
+                    events:{
+                        'submit #new-task':'newTask',
+                        'click .task .remove':'removeTask'
+
+                    },
+                    newTask:function(e){
+                        e.preventDefault();
+                        var task_data = this.serialize_form(e.currentTarget) 
+                        task_data.created = new Date().toString()
+                        task_data.modified = new Date().toString()
+
+                        this.options.tasks.add(new TaskModel(task_data));
+
+                    },
+                    removeTask:function(e){
+                        e.preventDefault();
+                        var index = $(e.currentTarget).data('id');
+                        var task = this.options.tasks.at(index)
+                        this.options.tasks.remove(task);
+                        
+                    }
+                });
+
+                // bind the application
+                $(document).ready(function(){
+                    new TasksWrapperView($('#tasks-container'),{'tasks':task_collection}).render();
+                });
+            })();
+        </script>
+    </head>
+    <body> 
+        <div id="tasks-container"></div>
+        <script id="tasks-view-template" type="text/template">
+            <div id="tasks-wrapper">
+                <h2>PubNub Task List!</h2>
+                <form id="new-task" method="POST" action="">
+                    <input type="text" name="name" />
+                    <input type="submit" value="add" />
+                </form>
+                <div id="tasks"></div>
+            </div>
+        </script> 
+        <script id="tasks-template" type="text/template">
+            <div id="tasks">
+                 <% tasks.forEach(function(task,i){ %>
+                    <%= _.template(TaskTpl,{'task':task,'id':i}) %>
+                 <% }); %>
+            </div>
+        </script>
+        <script id="task-template" type="text/template">
+            <div data-id="<%= id %>" class="task">
+                <a data-id="<%= id %>" href="#" class="remove">X</a>
+                <span class="name"><%= task.get('name') %></span>
+                <span class="created"><%= task.get('created') %></span>
+                <span class="modified"><%= task.get('modified') %></span>
+            </div>
+        </script>
+    </body>
+</html>
