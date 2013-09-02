@@ -24,9 +24,9 @@ $label_font: $serif;
 
 // http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/
 @mixin image-replacement {
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 /*----- Spacing & Sizing -----*/
@@ -36,11 +36,11 @@ $font_pixel_base: ($DEFAULT_SIZE *($font_size / 100%));  /* font_pixel_base: 16p
 
 // Function that returns the number of ems equivilent to a number of pixels
 @function fraction($numerator, $denominator:$font_pixel_base) {
-	@return ($numerator / $denominator);
+    @return ($numerator / $denominator);
 }
 
 // Function that returns the a percentage
 @function percent($numerator, $denominator:100) {
-	$fraction: fraction($numerator, $denominator);
-	@return $fraction * 100%;
+    $fraction: fraction($numerator, $denominator);
+    @return $fraction * 100%;
 }
