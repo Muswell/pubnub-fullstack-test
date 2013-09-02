@@ -20,7 +20,6 @@ $_6: Utilites ---- (./base/_utilities.scss)
 /*----- Spacing & Sizing -----*/
 /* font_size: 100% */
 /* font_pixel_base: 16px -- Must declare in conjunction with font-size to work properly*/
-/*----- SVG Elements -----*/
 /*--------------------------------------------------
     $_1.0 - Reset: Minimal browser standardization
 --------------------------------------------------*/
@@ -78,16 +77,28 @@ body {
   text-rendering: optimizeLegibility;
   background: #c50220;
   color: white;
-  margin: 0 auto; }
+  margin: 0 auto;
+  overflow-x: hidden; }
 
 h2 {
   font-size: 4em;
   /* 64px */
   line-height: 1.125em;
   /* 72px */
-  margin: 0.625em 0 0;
+  margin: 0.3125em 0 0;
   /* 20px 0 0 */
-  text-align: center; }
+  text-align: center;
+  position: relative;
+  text-shadow: 2px 2px 0 #ab021c;
+  /* &:after {
+       width: 100%;
+       content: "PubNub Task List!";
+       color: $dark_red;
+       position: absolute;
+       top: 2px;
+       left: 2px;
+       z-index: -1;
+   };*/ }
 
 /* ============================================================
     Text-level semantics
@@ -121,7 +132,9 @@ body {
 
 /* There are two divs with id=tasks */
 #tasks-wrapper > div > div {
-  padding: 0.3125em 1.5625%; }
+  max-width: 37.5em;
+  padding: 0.3125em 1.5625%;
+  margin: auto auto 3.125em; }
 
 .task {
   text-align: left;
@@ -136,6 +149,10 @@ body {
   background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.4), rgba(247, 247, 247, 0.4));
   border-radius: 5px;
   box-shadow: 2px 2px 7px 2px rgba(171, 2, 28, 0.8); }
+  .task:last-of-type {
+    -webkit-animation: slideInRight 1s ease alternate;
+    -moz-animation: slideInRight 1s ease alternate;
+    animation: slideInRight 1s ease alternate; }
 
 .remove {
   background-color: transparent;
@@ -147,7 +164,15 @@ body {
   vertical-align: middle;
   background: rgba(255, 255, 255, 0.3);
   color: rgba(0, 0, 0, 0.3);
+  -webkit-transition: color 0.25s ease-in, background-color 0.25s ease-in;
+  -moz-transition: color 0.25s ease-in, background-color 0.25s ease-in;
+  -ms-transition: color 0.25s ease-in, background-color 0.25s ease-in;
+  -o-transition: color 0.25s ease-in, background-color 0.25s ease-in;
+  transition: color 0.25s ease-in, background-color 0.25s ease-in;
   border-radius: 2px; }
+  .remove:hover, .remove:active {
+    color: #ab021c;
+    background-color: rgba(0, 0, 0, 0.1); }
   .remove:before {
     font-size: 16px;
     font-family: Verdana, Helvetica, Arial, sans-serif;
@@ -162,15 +187,22 @@ body {
 
 .created {
   font-family: Monaco, Courier, "Courier New", monospace;
+  font-size: 75%;
+  word-spacing: -.35em;
   color: #666666;
-  vertical-align: middle; }
+  vertical-align: middle;
+  white-space: nowrap;
+  display: inline-block;
+  margin-top: 0.25em; }
   .created:before {
     content: "Created: ";
+    word-spacing: 0;
     color: #c50220;
     font-family: Verdana, Helvetica, Arial, sans-serif; }
 
 .modified {
   font-family: Monaco, Courier, "Courier New", monospace;
+  font-size: 75%;
   vertical-align: middle;
   color: #666666;
   display: none; }
@@ -179,16 +211,15 @@ body {
     color: #c50220;
     font-family: Verdana, Helvetica, Arial, sans-serif; }
 
-/*--------------------------------------------------
-    $_5.0 - Components: Elements with specialized functionality or design
---------------------------------------------------*/
 form {
   width: 100%;
+  height: 3.125em;
   background-color: #ab021c;
   position: fixed;
+  z-index: 1;
   bottom: 0;
   padding: 0.625em;
-  text-align: right; }
+  margin-top: 1.25em; }
 
 input {
   font-size: 100%;
@@ -199,7 +230,7 @@ input {
     border: none;
     background-color: #c50220;
     color: white;
-    width: 15.625em;
+    width: 17.5em;
     padding: 0.25em; }
     input[type=text]:focus {
       outline: 0; }
@@ -219,6 +250,87 @@ input {
     width: 16px;
     cursor: pointer;
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE0LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgNDMzNjMpICAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDMyIDMyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTcuNzkyLDEuMTA0djEzLjE2aDEyLjY1NnYzLjM2MUgxNy43OTJ2MTMuMjcxaC0zLjU4NFYxNy42MjVIMS41NTJ2LTMuMzYxaDEyLjY1NlYxLjEwNEgxNy43OTJ6Ii8+CjwvZz4KPC9zdmc+) center center no-repeat; }
+
+@media all and (min-width: 600px) {
+  input[type=text] {
+    width: 33.4375em; } }
+/*--------------------------------------------------
+    $_5.0 - Components: Elements with specialized functionality or design
+--------------------------------------------------*/
+@-webkit-keyframes slideInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(2000px); }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translateX(-30px); }
+
+  80% {
+    -webkit-transform: translateX(10px); }
+
+  100% {
+    -webkit-transform: translateX(0); } }
+
+@-moz-keyframes slideInRight {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(2000px); }
+
+  60% {
+    opacity: 1;
+    -moz-transform: translateX(-30px); }
+
+  80% {
+    -moz-transform: translateX(10px); }
+
+  100% {
+    -moz-transform: translateX(0); } }
+
+@-ms-keyframes slideInRight {
+  0% {
+    opacity: 0;
+    -ms-transform: translateX(2000px); }
+
+  60% {
+    opacity: 1;
+    -ms-transform: translateX(-30px); }
+
+  80% {
+    -ms-transform: translateX(10px); }
+
+  100% {
+    -ms-transform: translateX(0); } }
+
+@-o-keyframes slideInRight {
+  0% {
+    opacity: 0;
+    -o-transform: translateX(2000px); }
+
+  60% {
+    opacity: 1;
+    -o-transform: translateX(-30px); }
+
+  80% {
+    -o-transform: translateX(10px); }
+
+  100% {
+    -o-transform: translateX(0); } }
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(2000px); }
+
+  60% {
+    opacity: 1;
+    transform: translateX(-30px); }
+
+  80% {
+    transform: translateX(10px); }
+
+  100% {
+    transform: translateX(0); } }
 
 /*--------------------------------------------------
     $_6.0 - Utilities: Debugging/Messaging elements

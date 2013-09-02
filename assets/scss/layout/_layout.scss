@@ -2,13 +2,13 @@ $total-width: 100%;
 
 #tasks-container {
     text-align: center;
-    //@include column(12);
-    //padding: percent(5, 320);
 }
 
 /* There are two divs with id=tasks */
 #tasks-wrapper > div > div {
-    padding: em(5, 16) percent(5, 320);
+    max-width: em(600);
+    padding: em(5) percent(5, 320);
+    margin: auto auto em(50);
 }
 
 
@@ -19,6 +19,10 @@ $total-width: 100%;
     @include linear-gradient(-45deg, rgba($white, .4), rgba(darken($white, 3%), .4));
     border-radius: 5px;
     box-shadow: 2px 2px 7px 2px rgba($dark_red, .8);
+    
+    &:last-of-type {
+        @include animation(slideInRight 1.0s ease alternate);
+    };
 }
 
 .remove {
@@ -26,10 +30,18 @@ $total-width: 100%;
     display: inline-block;
     vertical-align: middle;
     
+    
+    
     background: rgba($white, .3);
     color: rgba($black, .3);
+    @include transition (color 0.25s ease-in, background-color 0.25s ease-in);
+    
     border-radius: 2px;
     
+    &:hover, &:active {
+        color: $dark_red;
+        background-color: rgba($black, .1);
+    };
     
     &:before {    
         font-size: 16px;
@@ -54,11 +66,16 @@ $total-width: 100%;
 
 .created {
     font-family: $monospace;
+    font-size: 75%;
+    word-spacing: -.35em;
     color: $gray_40;
-    
     vertical-align: middle;
+    white-space: nowrap;
+    display: inline-block;
+    margin-top: em(4);
     &:before {
         content: "Created: ";
+        word-spacing: 0;
         color: $red;
         font-family: $body_font;
     };
@@ -66,6 +83,7 @@ $total-width: 100%;
 
 .modified {
     font-family: $monospace;
+    font-size: 75%;
     vertical-align: middle;
     color: $gray_40;
     &:before {
@@ -74,4 +92,50 @@ $total-width: 100%;
         font-family: $body_font;
     };
     display: none;
+}
+
+form {
+    width: 100%;
+    height: em(50);
+    background-color: $dark_red;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    padding: em(10);
+    margin-top: em(20);
+}
+
+input {
+    font-size: $font-size;
+    font-family: $sans_serif;
+    font-weight: lighter;
+    vertical-align: middle;
+    &[type=text] {
+        border: none;
+        background-color: $red;
+        color: $white;
+        width: em(280);
+        padding: em(4);
+        &:focus {
+            outline: 0;
+        };
+        
+        @include placeholder {
+            content: "HEY";
+          }
+    }
+    
+    &[type=submit] {
+       @include hide-text;
+       height: 16px;
+       width: 16px;
+       cursor: pointer;
+       background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE0LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgNDMzNjMpICAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDMyIDMyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTcuNzkyLDEuMTA0djEzLjE2aDEyLjY1NnYzLjM2MUgxNy43OTJ2MTMuMjcxaC0zLjU4NFYxNy42MjVIMS41NTJ2LTMuMzYxaDEyLjY1NlYxLjEwNEgxNy43OTJ6Ii8+CjwvZz4KPC9zdmc+) center center no-repeat;
+    }
+}
+
+@media all and (min-width: 600px) {
+    input[type=text] {
+        width: em(535);
+    }
 }

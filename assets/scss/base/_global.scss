@@ -10,13 +10,26 @@ body {
     background:$body_color;
     color: $txt_color;
     margin:0 auto;
+    overflow-x: hidden;
 }
 
 h2 {
     font-size: em(64); /* 64px */
     line-height: em(72, 64); /* 72px */
-    margin:em(40, 64) 0 0; /* 20px 0 0 */
+    margin:em(20, 64) 0 0; /* 20px 0 0 */
     text-align: center;
+    position: relative;
+    text-shadow: 2px 2px 0 $dark_red;
+    
+   /* &:after {
+        width: 100%;
+        content: "PubNub Task List!";
+        color: $dark_red;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        z-index: -1;
+    };*/
 }
 
 /* ============================================================
