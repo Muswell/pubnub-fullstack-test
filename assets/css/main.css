@@ -89,16 +89,7 @@ h2 {
   /* 20px 0 0 */
   text-align: center;
   position: relative;
-  text-shadow: 2px 2px 0 #ab021c;
-  /* &:after {
-       width: 100%;
-       content: "PubNub Task List!";
-       color: $dark_red;
-       position: absolute;
-       top: 2px;
-       left: 2px;
-       z-index: -1;
-   };*/ }
+  text-shadow: 2px 2px 0 #ab021c; }
 
 /* ============================================================
     Text-level semantics
@@ -149,10 +140,11 @@ body {
   background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.4), rgba(247, 247, 247, 0.4));
   border-radius: 5px;
   box-shadow: 2px 2px 7px 2px rgba(171, 2, 28, 0.8); }
-  .task:last-of-type {
-    -webkit-animation: slideInRight 1s ease alternate;
-    -moz-animation: slideInRight 1s ease alternate;
-    animation: slideInRight 1s ease alternate; }
+
+.task-added .task:last-of-type {
+  -webkit-animation: slideInRight 1s ease alternate;
+  -moz-animation: slideInRight 1s ease alternate;
+  animation: slideInRight 1s ease alternate; }
 
 .remove {
   background-color: transparent;
@@ -200,6 +192,10 @@ body {
     color: #c50220;
     font-family: Verdana, Helvetica, Arial, sans-serif; }
 
+/*
+ Since there is no modify capability to the task list and thus the created time is always the same as modified time, 
+ I've hidden the modified time.
+*/
 .modified {
   font-family: Monaco, Courier, "Courier New", monospace;
   font-size: 75%;
@@ -234,12 +230,6 @@ input {
     padding: 0.25em; }
     input[type=text]:focus {
       outline: 0; }
-    input[type=text]::-webkit-input-placeholder {
-      content: "HEY"; }
-    input[type=text]:-moz-placeholder {
-      content: "HEY"; }
-    input[type=text]:-ms-input-placeholder {
-      content: "HEY"; }
   input[type=submit] {
     background-color: transparent;
     border: 0;
@@ -249,8 +239,10 @@ input {
     height: 16px;
     width: 16px;
     cursor: pointer;
+    /* This SVG is the plus icon, would have just used text, but before and after psuedo elements don't work with inputs. */
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE0LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgNDMzNjMpICAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDMyIDMyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTcuNzkyLDEuMTA0djEzLjE2aDEyLjY1NnYzLjM2MUgxNy43OTJ2MTMuMjcxaC0zLjU4NFYxNy42MjVIMS41NTJ2LTMuMzYxaDEyLjY1NlYxLjEwNEgxNy43OTJ6Ii8+CjwvZz4KPC9zdmc+) center center no-repeat; }
 
+/* This layout works without any media queries, but I think it looks nice if the text input is widened at full width. */
 @media all and (min-width: 600px) {
   input[type=text] {
     width: 33.4375em; } }
