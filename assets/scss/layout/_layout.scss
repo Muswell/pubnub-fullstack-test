@@ -38,7 +38,6 @@
     background: rgba($white, .3);
     color: rgba($black, .3);
     @include transition (color 0.25s ease-in, background-color 0.25s ease-in);
-    
     border-radius: 2px;
     
     &:hover, &:active {
@@ -54,7 +53,6 @@
         vertical-align: middle;
         padding: em(2) em(4);
         content: "\2713";
-        
     };
 }
 
