@@ -20,6 +20,20 @@ $_6: Utilites ---- (./base/_utilities.scss)
 /*----- Spacing & Sizing -----*/
 /* font_size: 100% */
 /* font_pixel_base: 16px -- Must declare in conjunction with font-size to work properly*/
+.created, .modified {
+  font-family: Monaco, Courier, "Courier New", monospace;
+  font-size: 75%;
+  word-spacing: -.35em;
+  color: #666666;
+  vertical-align: middle;
+  white-space: nowrap;
+  display: block;
+  margin-top: 0.25em; }
+  .created:before, .modified:before {
+    word-spacing: 0;
+    color: #c50220;
+    font-family: Verdana, Helvetica, Arial, sans-serif; }
+
 /*--------------------------------------------------
     $_1.0 - Reset: Minimal browser standardization
 --------------------------------------------------*/
@@ -177,35 +191,15 @@ body {
 .name {
   vertical-align: middle; }
 
-.created {
-  font-family: Monaco, Courier, "Courier New", monospace;
-  font-size: 75%;
-  word-spacing: -.35em;
-  color: #666666;
-  vertical-align: middle;
-  white-space: nowrap;
-  display: inline-block;
-  margin-top: 0.25em; }
-  .created:before {
-    content: "Created: ";
-    word-spacing: 0;
-    color: #c50220;
-    font-family: Verdana, Helvetica, Arial, sans-serif; }
+.created:before {
+  content: "Created: "; }
 
 /*
  Since there is no modify capability to the task list and thus the created time is always the same as modified time, 
  I've hidden the modified time.
 */
-.modified {
-  font-family: Monaco, Courier, "Courier New", monospace;
-  font-size: 75%;
-  vertical-align: middle;
-  color: #666666;
-  display: none; }
-  .modified:before {
-    content: "Modified: ";
-    color: #c50220;
-    font-family: Verdana, Helvetica, Arial, sans-serif; }
+.modified:before {
+  content: "Modified: "; }
 
 form {
   width: 100%;

@@ -61,19 +61,9 @@
 }
 
 .created {
-    font-family: $monospace;
-    font-size: 75%;
-    word-spacing: -.35em;
-    color: $gray_40;
-    vertical-align: middle;
-    white-space: nowrap;
-    display: inline-block;
-    margin-top: em(4);
+    @extend %time;
     &:before {
         content: "Created: ";
-        word-spacing: 0;
-        color: $red;
-        font-family: $body_font;
     };
 }
 
@@ -82,16 +72,10 @@
  I've hidden the modified time.
 */
 .modified {
-    font-family: $monospace;
-    font-size: 75%;
-    vertical-align: middle;
-    color: $gray_40;
+    @extend %time;
     &:before {
         content: "Modified: ";
-        color: $red;
-        font-family: $body_font;
     };
-    display: none;
 }
 
 form {
