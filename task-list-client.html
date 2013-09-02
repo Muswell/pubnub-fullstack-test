@@ -4,12 +4,12 @@
         <title>PubNub TaskList</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<!-- Viewport -->
-		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <!-- Viewport -->
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-		<!-- Stylesheets -->
-		<link href='http://fonts.googleapis.com/css?family=Volkhov' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="assets/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <!-- Stylesheets -->
+        <link href='http://fonts.googleapis.com/css?family=Volkhov' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="assets/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
         <script src="lib/jquery-latest.min.js"></script>
         <script src="lib/underscore-min.js"></script>
@@ -158,7 +158,7 @@
                         task_data.created = new Date().toString()
                         task_data.modified = new Date().toString()
 
-						$('#tasks-container').addClass("task-added").removeClass("task-removed");
+                        $('#tasks-container').addClass("task-added").removeClass("task-removed");
 
                         this.options.tasks.add(new TaskModel(task_data));
 
@@ -167,8 +167,8 @@
                         e.preventDefault();
                         var index = $(e.currentTarget).data('id');
                         var task = this.options.tasks.at(index)
-							
-						$('#tasks-container').addClass("task-removed").removeClass("task-added");
+                            
+                        $('#tasks-container').addClass("task-removed").removeClass("task-added");
 
                         this.options.tasks.remove(task);
                         
