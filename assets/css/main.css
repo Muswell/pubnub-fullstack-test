@@ -27,9 +27,11 @@ $_6: Utilites ---- (./base/_utilities.scss)
   color: #666666;
   vertical-align: middle;
   white-space: nowrap;
-  display: inline-block; }
+  display: inline-block;
+  min-width: 47%; }
   .created:before, .modified:before {
     word-spacing: 0;
+    display: inline-block;
     color: #c50220;
     font-family: Verdana, Helvetica, Arial, sans-serif; }
 
