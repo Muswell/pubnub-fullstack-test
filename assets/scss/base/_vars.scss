@@ -44,3 +44,21 @@ $font_pixel_base: ($DEFAULT_SIZE *($font_size / 100%));  /* font_pixel_base: 16p
     $fraction: fraction($numerator, $denominator);
     @return $fraction * 100%;
 }
+
+%time {
+    font-family: $monospace;
+    font-size: em(12);
+    word-spacing: -.35em;
+    color: $gray_40;
+    vertical-align: middle;
+    white-space: nowrap;
+    display: inline-block;
+    min-width: 47%;
+    
+    &:before {
+        word-spacing: 0;
+        display: inline-block;
+        color: $red;
+        font-family: $body_font;
+    };
+}

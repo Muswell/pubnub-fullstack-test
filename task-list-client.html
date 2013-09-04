@@ -158,6 +158,8 @@
                         task_data.created = new Date().toString()
                         task_data.modified = new Date().toString()
 
+                        $('#tasks-container').addClass("task-added").removeClass("task-removed");
+
                         this.options.tasks.add(new TaskModel(task_data));
 
                     },
@@ -165,6 +167,9 @@
                         e.preventDefault();
                         var index = $(e.currentTarget).data('id');
                         var task = this.options.tasks.at(index)
+                            
+                        $('#tasks-container').addClass("task-removed").removeClass("task-added");
+
                         this.options.tasks.remove(task);
                         
                     }
