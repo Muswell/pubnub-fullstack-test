@@ -47,13 +47,12 @@ $font_pixel_base: ($DEFAULT_SIZE *($font_size / 100%));  /* font_pixel_base: 16p
 
 %time {
     font-family: $monospace;
-    font-size: 75%;
+    font-size: em(12);
     word-spacing: -.35em;
     color: $gray_40;
     vertical-align: middle;
     white-space: nowrap;
-    display: block;
-    margin-top: em(4);
+    display: inline-block;
     
     &:before {
         word-spacing: 0;
